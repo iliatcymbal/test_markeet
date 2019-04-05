@@ -1,0 +1,10 @@
+@import "./variables";
+
+body {
+    background: $bgColor;
+    @extend .light;
+}
+
+.light {
+    color: #111;
+}
