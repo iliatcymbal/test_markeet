@@ -35,16 +35,14 @@ describe('getUsers()', () => {
     });
 
 
-    it('should call console.log with result if success', (done) => {
+    it('should call console.log with result if success', async () => {
         const fakeConsole = sinon.stub(console, 'log');
 
         createStub();
-        getUsers().then(() => {
-            console.log.restore();
-            expect(fakeConsole.getCall(0).args[0]).to.equal(testString);
-            done();
-            fakeConsole.restore();
-        });
+        await getUsers();
+
+        console.log.restore();
+        expect(fakeConsole.getCall(0).args[0]).to.equal(testString);
     });
 
     it('should call console.error with error text if failed', (done) => {
