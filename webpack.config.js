@@ -4,8 +4,6 @@ const CssPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const args = require('yargs').argv;
 
-console.log('===>', args)
-
 const package = require('./package');
 const isProduction = process.env.NODE_ENV === 'production';
 const isStylesExternal = args.env && args.env.styles;
