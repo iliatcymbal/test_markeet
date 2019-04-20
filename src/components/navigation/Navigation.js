@@ -1,12 +1,11 @@
-import React from 'react';
+import './navigation.scss';
 
-import './navigation.css'
-
-export const Navigation = () => (
-    <nav className="nav">
-        <ul>
-            <li><a href="#">One</a></li>
-            <li><a href="#">Two</a></li>
-        </ul>
-    </nav>
+export const Navigation = ({ isLogin }) => (
+  <nav className="nav">
+    <ul>
+      <li><a href="/one">One</a></li>
+      <li><a href="/two">Two</a></li>
+      {isLogin &&  <li><a href="/user">User Name</a></li>}
+    </ul>
+  </nav>
 );

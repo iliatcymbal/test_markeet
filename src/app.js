@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Navigation } from './components/navigation/Navigation'
+import { Header } from './components/header';
+import { Main } from './components/main/Main';
 
-const Time = () => <time>{new Date().toLocaleString()}</time>;
-const header = (
-    <header>
-        <h1>Hello <Time /> </h1>
-        <Navigation />
-    </header>
+import './app.scss';
+
+const App = () => (
+  <>
+    <Header test />
+    <Main />
+  </>
 );
 
-ReactDOM.render(header, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
+
+if (module.hot) {
+  module.hot.accept();
+}

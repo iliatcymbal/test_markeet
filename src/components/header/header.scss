@@ -1,0 +1,7 @@
+.header {
+    background: var(--navBg);
+    padding: var(--commonPadding);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+}

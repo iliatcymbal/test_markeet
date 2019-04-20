@@ -1,0 +1,13 @@
+@import "variables.scss";
+
+body {
+  margin: 0;
+  background: var(--mainBg);
+  height: 100vh;
+}
+
+#app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
