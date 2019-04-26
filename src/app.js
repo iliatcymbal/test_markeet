@@ -6,12 +6,20 @@ import { Main } from './components/main/Main';
 
 import './app.scss';
 
-const App = () => (
-  <>
-    <Header test />
-    <Main />
-  </>
-);
+const App = () => {
+  const props = {
+    user: 'Ilia',
+    age: 34,
+    element: 'Succes'
+  };
+
+  return (
+    <>
+      <Header test />
+      <Main {...props} age={55} />
+    </>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('app'));
 

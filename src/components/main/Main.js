@@ -1,40 +1,46 @@
+import { Users } from '../users';
+import { Counter } from '../counter';
+
 import './main.scss';
 
-const users = [
-  { id: 123, name: 'Patric' },
-  { id: 46, name: 'Teresa' },
-  { id: 789, name: 'John' }
-];
+export class Main extends Component {
+  state = {
+    users: [],
+    selectedUser: null
+  }
 
-const Li = ({ item, field, index }) => (
-  <li>
-    <strong>{index}</strong> - {item[field]}
-  </li>
-);
+  constructor() {
+    super();
+    this.getUsers();
+  }
 
-const Nums = ({ list = [], field = 'name', isUl }) => {
-  const items = list.map((item, index) => (
-    <Li
-      key={item.id}
-      item={item}
-      field={field}
-      index={index}
-    />
-  ));
+  getUsers() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(data => data.json())
+      .then(users => this.setState({
+        users
+      }));
+  }
 
-  return (
-    isUl ? <ul>{items}</ul> : <ol>{items}</ol>
-  );
-};
+  showUserInfo = ({ phone, name, website }) => {
+    this.setState({ selectedUser: name });
+  }
 
-export const Main = () => (
-  <main className="main">
-    <aside className="aside">Some addtional info</aside>
-    <section className="content">
-      <h1>Main page</h1>
-      <p>Ok, here we are!</p>
+  render() {
+    const { user, element } = this.props;
+    const { users, selectedUser } = this.state;
 
-      <Nums isUl list={users} field="id" />
-    </section>
-  </main>
-);
+    return (
+      <main className="main">
+        <aside className="aside">Some additional info</aside>
+        <section className="content">
+          <h1>Main page ({selectedUser})</h1>
+          <p>{user}</p>
+
+          <Users list={users} onClick={this.showUserInfo} />
+
+        </section>
+      </main>
+    );
+  }
+}

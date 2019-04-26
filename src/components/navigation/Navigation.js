@@ -5,7 +5,7 @@ export const Navigation = ({ isLogin }) => (
     <ul>
       <li><a href="/one">One</a></li>
       <li><a href="/two">Two</a></li>
-      {isLogin &&  <li><a href="/user">User Name</a></li>}
+      {isLogin && <li><a href="/user">User Name</a></li>}
     </ul>
   </nav>
 );
