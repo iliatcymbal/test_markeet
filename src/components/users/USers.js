@@ -18,10 +18,10 @@ export const Users = ({ list, onClick }) => {
   return (
     <ul>
       {
-        list && list.map(({ id, ...rest }) => (
+        list && list.map((item) => (
           <User
-            key={id}
-            data={rest}
+            key={item.id}
+            data={item}
             onClick={onClick}
           />
         ))

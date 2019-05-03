@@ -6,7 +6,9 @@ import './main.scss';
 export class Main extends Component {
   state = {
     users: [],
-    selectedUser: null
+    posts: [],
+    selectedUser: null,
+    filterUser: ''
   }
 
   constructor() {
@@ -22,13 +24,29 @@ export class Main extends Component {
       }));
   }
 
-  showUserInfo = ({ phone, name, website }) => {
+  showUserInfo = ({ id, name }) => {
     this.setState({ selectedUser: name });
+
+    fetch(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
+      .then(data => data.json())
+      .then(posts => this.setState({ posts }));
+  }
+
+  setFilter = ({ target }) => {
+    this.setState({ filterUser: target.value });
+  }
+
+  filterUsers = (user) => {
+    const { filterUser } = this.state;
+
+    if (filterUser.length > 2) return user.name.toLowerCase().includes(filterUser);
+
+    return true;
   }
 
   render() {
-    const { user, element } = this.props;
-    const { users, selectedUser } = this.state;
+    const { user } = this.props;
+    const { users, selectedUser, posts, filterUser } = this.state;
 
     return (
       <main className="main">
@@ -37,7 +55,16 @@ export class Main extends Component {
           <h1>Main page ({selectedUser})</h1>
           <p>{user}</p>
 
-          <Users list={users} onClick={this.showUserInfo} />
+          <input type="text" value={filterUser} onChange={this.setFilter} />
+          <Users list={users.filter(this.filterUsers)} onClick={this.showUserInfo} />
+
+          {
+            posts.length !== 0 &&
+            <div>
+              <h2>Posts</h2>
+              {posts.map(post => <p>{post.title}</p>)}
+            </div>
+          }
 
         </section>
       </main>
