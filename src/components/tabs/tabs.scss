@@ -1,0 +1,14 @@
+.nav-tab {
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+
+        a {
+            display: block;
+            padding: 10px 15px;
+            background: #eee;
+        }
+    }
+}

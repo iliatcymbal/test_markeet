@@ -1,7 +1,18 @@
 import { Users } from '../users';
 import { Counter } from '../counter';
+import { Tabs, Tab } from '../tabs';
 
 import './main.scss';
+
+const Test = ({ children }) => {
+  console.log(children);
+
+  return (
+    <div>
+        {children.filter(el => el.type === Tabs)}
+    </div>
+  );
+}
 
 export class Main extends Component {
   state = {
@@ -55,7 +66,18 @@ export class Main extends Component {
           <h1>Main page ({selectedUser})</h1>
           <p>{user}</p>
 
-          <input type="text" value={filterUser} onChange={this.setFilter} />
+          <Tabs selectedIndex={this.state.tabIndex}>
+            <Tab title="One">
+              <h2>Hey</h2>
+              <p>Lorem ipsum dolor sit amet...</p>
+            </Tab>
+
+            <Tab title="Two">
+              <h2>Yo</h2>
+              <p>Lorem ipsum dolor sit amet...</p>
+            </Tab>
+          </Tabs>
+          {/*<input type="text" value={filterUser} onChange={this.setFilter} />
           <Users list={users.filter(this.filterUsers)} onClick={this.showUserInfo} />
 
           {
@@ -64,7 +86,7 @@ export class Main extends Component {
               <h2>Posts</h2>
               {posts.map(post => <p>{post.title}</p>)}
             </div>
-          }
+          }*/}
 
         </section>
       </main>

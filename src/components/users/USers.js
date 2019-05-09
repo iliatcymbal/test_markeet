@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const User = ({ data, onClick }) => {
   const clickHandler = (event) => {
     onClick(data);
@@ -29,3 +31,12 @@ export const Users = ({ list, onClick }) => {
     </ul>
   );
 }
+
+Users.propTypes = {
+  list: PropTypes.array.isRequired,
+  onClick: PropTypes.func
+};
+
+Users.defaultProps = {
+  onClick: _ => _
+};
