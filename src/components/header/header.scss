@@ -1,7 +1,33 @@
+@import "../../variables";
+
 .header {
-    background: var(--navBg);
-    padding: var(--commonPadding);
-    display: grid;
-    grid-template-columns: auto 1fr;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  background: var(--bg-header);
+  box-shadow: 0 2px 4px var(--common-shadow-color);
+  margin: 0 0 var(--block-bottom-margin);
+
+  &-box {
+    width: var(--common-column-width);
+    padding: var(--common-paddings);
+    display: flex;
     align-items: center;
+  }
+
+  .header-logo {
+    display: inline-block;
+    margin: 0 20px 0 0;
+  }
+
+  a {
+    color: #90c3f8;
+    margin: 0 15px 0 0;
+    text-decoration: none;
+    outline: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

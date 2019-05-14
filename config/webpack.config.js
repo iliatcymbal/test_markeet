@@ -3,10 +3,13 @@ const HTMLPlugin = require('html-webpack-plugin');
 const CssPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const args = require('yargs').argv;
+const copyPlugin = require('copy-webpack-plugin');
 
 const package = require('../package');
 const isProduction = process.env.NODE_ENV === 'production';
 const isStylesExternal = args.env && args.env.styles;
+
+const images = ['jpg', 'jpeg', 'png', 'gif', 'svg'];
 
 const plugins = [
   new HTMLPlugin({
@@ -20,7 +23,9 @@ const plugins = [
   new webpack.ProvidePlugin({
     React: 'react',
     Component: ['react', 'Component']
-  })
+  }),
+
+  new copyPlugin(images.map(ext => ({ from: `**/*/*.${ext}`, to: 'images/[name].[ext]' })))
 ];
 
 if (isStylesExternal) {
@@ -37,7 +42,7 @@ module.exports = {
 
   module: {
     rules: [
-      {
+      /*{
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
@@ -45,7 +50,7 @@ module.exports = {
         options: {
           emitWarning: true
         }
-      },
+      },*/
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -65,6 +70,18 @@ module.exports = {
           isStylesExternal ? CssPlugin.loader : 'style-loader',
           'css-loader',
           'sass-loader'
+        ]
+      },
+
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 500000
+            }
+          }
         ]
       }
 
@@ -86,6 +103,6 @@ module.exports = {
     publicPath: '/',
     port: 9005,
     hot: true,
-    clientLogLevel: 'none'
+    historyApiFallback: true,
   }
 };

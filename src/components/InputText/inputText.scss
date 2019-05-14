@@ -1,0 +1,26 @@
+@import '../../variables';
+
+.input-text {
+  --inputSpace: 3px;
+  --height: #{var(--main-lh)} + #{var(--inputSpace)} * 2;
+
+  color: var(--main-color);
+  height: var(--height);
+
+  input[type=text] {
+    background: none;
+    height: var(--height);
+    line-height: var(--height);
+    padding: var(--inputSpace);
+    font: var(--main-font);
+    color: var(--main-color);
+    outline: none;
+    box-shadow: 0 0 0 1px var(--common-shadow-color);
+    margin: -#{var(--inputSpace)} 0 (-#{var(--inputSpace)}) (-#{var(--inputSpace)});
+    min-width: 50px;
+
+    &:focus {
+      box-shadow: 0 0 0 1px var(--common-shadow-color), 1px 1px 1px var(--common-shadow-color) inset;
+    }
+  }
+}

@@ -1,7 +1,40 @@
 :root {
+  $mainFs: 16px;
+  $mainLh: $mainFs * 1.3;
+
   /* base backgrounds */
-  --mainBg: #ccc;
+  --mainBg: #ccc /*url('images/main-bg.png')*/;
   --navBg: #aaa;
 
   --commonPadding: 15px;
+  
+  --main-color: #fff;
+  --base-bg: #193c52;
+  --base-link-color: #fff;
+
+  --main-fs: $mainFs;
+  --main-lh: $mainLh;
+  --main-font: #{$mainFs}/#{$mainLh} Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+  --common-width: 918px;
+  --common-column-width: 860px;
+  --common-top-padding: 18px;
+  --common-side-padding: 15px;
+  --common-paddings: var(--common-top-padding) var(--common-side-padding);
+  --common-bottom-margin: 15px;
+  --block-bottom-margin: 50px;
+
+  --input-font-size: 20px;
+  --input-height: 55px;
+  --input-bg: #fff;
+  --input-bg-disabled: #93a7eb;
+
+  --common-shadow-color: rgba(0, 0, 0, .5);
+
+  --bg-header: #01000c;
+
+  --base-border-rad: 4px;
+
+  --error-color: #f00;
+  --correct-color: #006400;
 }
