@@ -8,17 +8,13 @@ export class InputText extends Component {
     activate: _ => _
   }
 
-  constructor(opts) {
-    super(opts);
+  inputEl = React.createRef();
+  textEl = React.createRef();
 
-    this.inputEl = React.createRef();
-    this.textEl = React.createRef();
-
-    this.state = {
-      inputText: this.props.text,
-      inputActive: this.props.active
-    };
-  }
+  state = {
+    inputText: this.props.text,
+    inputActive: this.props.active
+  };
 
   change = ({ target }) => {
     this.setState({ inputText: target.value });
