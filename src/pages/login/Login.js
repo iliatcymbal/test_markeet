@@ -1,4 +1,10 @@
+import { useState } from 'react'
+import { Loader } from '../../components/loader'
+import { server } from '../../services'
+
 export const Login = ({ onLogin }) => {
+  const [loading, setLoadState] = useState(false);
+
   const onSubmit = (e) => {
     e.preventDefault();
     const data = {
@@ -6,9 +12,13 @@ export const Login = ({ onLogin }) => {
       password: e.target.password.value,
     };
 
-    setTimeout(() => {
-      onLogin(data);
-    }, 1000);
+    setLoadState(true);
+
+    server.post('public/login', data)
+      .then(user => {
+        onLogin(user);
+        setLoadState(false);
+      })
   };
 
   return (
@@ -29,6 +39,8 @@ export const Login = ({ onLogin }) => {
         <br /><br />
 
       <input type="submit" value="Login" />
+
+      <Loader shown={loading} />
     </form>
   );
 };

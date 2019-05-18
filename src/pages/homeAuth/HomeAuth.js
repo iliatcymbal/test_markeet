@@ -2,12 +2,25 @@ import { Button } from '../../components/button';
 import './main.scss';
 
 export class HomeAuth extends Component {
+  state = {
+    info: {}
+  }
+
   goToCategories = () => {
     console.log('Go to categories');
   }
 
+  componentDidMount() {
+    fetch('http://localhost:8086/shop_info', {
+      credentials: 'include',
+    })
+      .then(r => r.json())
+      .then(info => this.setState({ info }));
+  }
+
   render() {
-    const { info = {}, user = {} } = this.props;
+    const { user = {} } = this.props;
+    const { info } = this.state;
 
     return (
       <article className="invitation">
