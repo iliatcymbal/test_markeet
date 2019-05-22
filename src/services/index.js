@@ -16,7 +16,13 @@ export const request = (url, method = 'get', data, settings = {}) => {
   if (data) options.body = JSON.stringify(data);
 
   const promise = fetch(`${BASE_URL}/${url}`, options)
-    .then(r => r.json());
+    .then(r => {
+      if (r.status < 200 || r.status > 299) {
+        throw new Error(r.statusText);
+      }
+
+      return r.json();
+    });
 
   return promise;
 };

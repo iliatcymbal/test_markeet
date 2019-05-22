@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Loader } from '../../components/loader'
-import { server } from '../../services'
+import { loginUserService } from '../../services/userService'
 
 export const Login = ({ onLogin }) => {
   const [loading, setLoadState] = useState(false);
@@ -14,10 +14,10 @@ export const Login = ({ onLogin }) => {
 
     setLoadState(true);
 
-    server.post('public/login', data)
+    loginUserService(data)
       .then(user => {
-        onLogin(user);
         setLoadState(false);
+        onLogin(user);
       })
   };
 

@@ -1,5 +1,6 @@
 import { NavLink, Link } from 'react-router-dom';
 
+import { server } from '../../services'
 import './navigation.scss';
 
 const items = [
@@ -11,12 +12,13 @@ const items = [
   { label: 'Contacts', id: 'contacts', icon: 'map-signs' }
 ];
 
-export const Navigation = ({ user, info }) => {
+export const Navigation = ({ user, info, onLogout }) => {
   let filteredItems = items.filter(item => !item.auth);
   const amount = info ? ` (${info.categories}/${info.products})` : '';
   const logoutHandler = (e) => {
     e.preventDefault();
-    console.log('Logout');
+    server.get('logout')
+      .then(() => onLogout(null));
   };
 
   if (user) {
@@ -45,7 +47,7 @@ export const Navigation = ({ user, info }) => {
         }
       </ul>
 
-     {/* <div className="user-box">
+      <div className="user-box">
         {
           user ?
             <>
@@ -56,12 +58,12 @@ export const Navigation = ({ user, info }) => {
               <ul>
                 <li><Link to="/user">Profile</Link></li>
                 <li>
-                  <a
-                    href="/"
-                    onClick={logoutHandler}
-                  >
-                    Logout
-                  </a>
+                <a
+                  href="/"
+                  onClick={logoutHandler}
+                >
+                  Logout
+                </a>
                 </li>
               </ul>
             </> :
@@ -79,7 +81,7 @@ export const Navigation = ({ user, info }) => {
               </a>
             </>
         }
-      </div>*/}
+      </div>
     </nav>
   );
 };
