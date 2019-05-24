@@ -1,49 +1,41 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { HomeAuth } from './homeAuth';
-import { Home } from './home';
-import { Login } from './login';
+import { Route, Switch } from 'react-router-dom';
 
-export const Pages = ({ onLogin, user }) => {
+import { Private } from './Private';
+import { Public } from './Public';
 
-  return (
-    user ?
-    <Switch>
-        <Route
-          path="/"
-          exact
-          component={Home}
-        />
+import { Category } from './category';
+import { Product } from './product';
 
-        <Route
-          path="/categories"
-          component={HomeAuth}
-        />
+export const PagesComponent = ({ onLogin, user }) => (
+  <Switch>
+    <Route
+      path="/categories"
+      render={() => <h1>Categories</h1>}
+      exact
+    />
 
-        <Redirect
-          from="/login"
-          to="/"
-        />
+    <Route
+      path="/categories/:id"
+      component={Category}
+    />
 
-        <Route
-          render={({ location }) => <h1>Requested url <mark>{location.pathname}</mark> not found</h1>}
-        />
-      </Switch> :
-    <Switch>
-      <Route
-        path="/"
-        exact
-        component={Home}
-      />
+    <Route
+      path="/products/:id"
+      component={Product}
+    />
 
-      <Route
-        path="/login"
-        render={(props) => <Login onLogin={onLogin} {...props} />}
-      />
+    {
+      user ? Private : Public
+    }
 
-      <Route
-        render={({ location }) => <h1>Requested url <mark>{location.pathname}</mark> not found</h1>}
-      />
-    </Switch>
-  );
-};
+    <Route
+      render={({ location }) => <h1>Requested url <mark>{location.pathname}</mark> not found</h1>}
+    />
+  </Switch>
+);
+
+const mapState = state => ({ user: state.user });
+
+export const Pages = connect(mapState)(PagesComponent);

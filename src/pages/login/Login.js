@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { connect } from 'react-redux'
 import { Loader } from '../../components/loader'
 import { loginUserService } from '../../services/userService'
+import { setUser } from '../../store/user'
 
-export const Login = ({ onLogin }) => {
+export const LoginComponent = ({ dispatch }) => {
   const [loading, setLoadState] = useState(false);
 
   const onSubmit = (e) => {
@@ -17,7 +19,8 @@ export const Login = ({ onLogin }) => {
     loginUserService(data)
       .then(user => {
         setLoadState(false);
-        onLogin(user);
+        dispatch(setUser(user));
+        // Store.dispatch({ type: 'Set user', data: user })
       })
   };
 
@@ -44,3 +47,5 @@ export const Login = ({ onLogin }) => {
     </form>
   );
 };
+
+export const Login = connect()(LoginComponent);

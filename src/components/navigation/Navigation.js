@@ -18,7 +18,7 @@ export const Navigation = ({ user, info, onLogout }) => {
   const logoutHandler = (e) => {
     e.preventDefault();
     server.get('logout')
-      .then(() => onLogout(null));
+      .then(() => onLogout());
   };
 
   if (user) {
