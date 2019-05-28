@@ -1,18 +1,17 @@
-import { connect } from 'react-redux';
-
 import { Route, Switch } from 'react-router-dom';
 
 import { Private } from './Private';
 import { Public } from './Public';
 
 import { Category } from './category';
+import { Categories } from './categories';
 import { Product } from './product';
 
-export const PagesComponent = ({ onLogin, user }) => (
+export const Pages = ({ user }) => (
   <Switch>
     <Route
       path="/categories"
-      render={() => <h1>Categories</h1>}
+      component={Categories}
       exact
     />
 
@@ -35,7 +34,3 @@ export const PagesComponent = ({ onLogin, user }) => (
     />
   </Switch>
 );
-
-const mapState = state => ({ user: state.user });
-
-export const Pages = connect(mapState)(PagesComponent);

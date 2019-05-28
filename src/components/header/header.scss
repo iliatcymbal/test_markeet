@@ -9,10 +9,13 @@
   margin: 0 0 var(--block-bottom-margin);
 
   &-box {
-    width: var(--common-column-width);
+    max-width: var(--common-column-width);
+    width: 93vw;
     padding: var(--common-paddings);
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
     align-items: center;
+    box-sizing: border-box;
   }
 
   .header-logo {

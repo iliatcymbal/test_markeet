@@ -5,21 +5,24 @@ import { removeUser } from '../../store/user';
 
 import './header.scss';
 
-export const HeaderComponent = ({ user, dispatch }) => {
-  const onLogout = () => dispatch(removeUser());
-
+export const HeaderComponent = ({ user, removeUser, info }) => {
   return (
     <header className="header">
       <div className="header-box">
         <Link to="/" className="header-logo"><img src="/images/logo.png" alt="todo" /></Link>
-        <Navigation user={user} onLogout={onLogout} />
+        <Navigation user={user} info={info} onLogout={removeUser} />
       </div>
     </header>
   );
 };
 
 const mapToProps = state => ({
-  user: state.user
+  user: state.user,
+  info: state.info,
 });
 
-export const Header = connect(mapToProps)(HeaderComponent);
+const mapDispatchToProps = dispatch => ({
+  removeUser() { dispatch(removeUser()) },
+});
+
+export const Header = connect(mapToProps, mapDispatchToProps)(HeaderComponent);

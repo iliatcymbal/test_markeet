@@ -3,4 +3,5 @@ export default {
   info: null,
   categories: [],
   products: [],
+  status: '',
 };

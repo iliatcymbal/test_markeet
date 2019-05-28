@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { connect } from 'react-redux'
 import { Loader } from '../../components/loader'
 import { loginUserService } from '../../services/userService'
 import { setUser } from '../../store/user'
 
 export const LoginComponent = ({ dispatch }) => {
   const [loading, setLoadState] = useState(false);
+  const [error, setError] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +21,10 @@ export const LoginComponent = ({ dispatch }) => {
         setLoadState(false);
         dispatch(setUser(user));
         // Store.dispatch({ type: 'Set user', data: user })
+      })
+      .catch(err => {
+        setLoadState(false);
+        setError(err);
       })
   };
 
@@ -40,6 +44,10 @@ export const LoginComponent = ({ dispatch }) => {
         defaultValue="admin"
       />
         <br /><br />
+
+        <p>
+          {error}
+        </p>
 
       <input type="submit" value="Login" />
 

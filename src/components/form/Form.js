@@ -15,7 +15,6 @@ export class Form extends Component {
 
   // state = { email: { value: '', error: '' } } }
 
-
   changeField = ({ target }) => {
     const value = target.hasOwnProperty('checked') ? target.checked : target.value;
 

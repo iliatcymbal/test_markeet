@@ -21,6 +21,7 @@ const plugins = [
   new webpack.HotModuleReplacementPlugin(),
 
   new webpack.ProvidePlugin({
+    connect: ['react-redux', 'connect'],
     React: 'react',
     Component: ['react', 'Component']
   }),

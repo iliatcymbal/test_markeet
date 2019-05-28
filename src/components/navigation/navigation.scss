@@ -3,7 +3,6 @@
 .main-nav {
   display: flex;
   justify-content: space-between;
-  width: 100%;
 
   &__pages {
     display: flex;
@@ -44,6 +43,7 @@
       display: none;
       top: 100%;
       background: var(--base-bg);
+      right: 0;
 
       li {
         margin: 0 0 10px;
