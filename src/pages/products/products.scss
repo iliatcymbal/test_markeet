@@ -1,0 +1,60 @@
+.products {
+  margin: 0 -50px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    margin: 15px 57px 35px 0;
+    width: 125px;
+
+    .input-text span {
+      cursor: pointer;
+    }
+  }
+}
+
+.product {
+  --product-color: #90c3f8;
+
+  &-box {
+    position: relative;
+    border: 2px solid var(--product-color);
+    text-align: center;
+    padding: 45px 0 0;
+    margin: 0 0 15px;
+    height: 165px;
+    box-sizing: border-box;
+
+    img {
+      max-width: 110px;
+      max-height: 110px;
+    }
+  }
+
+  &-controls {
+    top: 0;
+    right: 0;
+    display: flex;
+    position: absolute;
+    background: var(--product-color);
+    padding: 0 3px;
+
+    span {
+      cursor: pointer;
+
+      & + span {
+        margin: 0 0 0 5px;
+      }
+    }
+
+    .remove {
+      color: #fff;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}
