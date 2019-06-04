@@ -1,0 +1,31 @@
+@import "../../variables";
+
+body a.button {
+  height: var(--input-height);
+  line-height: var(--input-height);
+  font-size: var(--input-font-size);
+  min-width: 150px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  background: var(--input-bg);
+  color: #000;
+  display: inline-block;
+  text-align: center;
+  border-radius: var(--base-border-rad);
+  box-shadow: 1px 1px 3px rgba(0,0,0, .7);
+  text-transform: uppercase;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 3px rgba(0,0,0, .7), 0 0 1px 2px #8d9ef0;
+  }
+
+  &-disabled {
+    background: var(--input-bg-disabled);
+    cursor: default;
+    pointer-events: none;
+  }
+}

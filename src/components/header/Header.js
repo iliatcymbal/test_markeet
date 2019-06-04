@@ -17,7 +17,7 @@ export const HeaderComponent = ({ user, removeUser, info }) => {
 };
 
 const mapToProps = state => ({
-  user: state.user,
+  user: state.user.data,
   info: state.info,
 });
 

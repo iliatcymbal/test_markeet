@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Loader } from '../../components/loader'
-import { loginUserService } from '../../services/userService'
-import { setUser } from '../../store/user'
+import { loginUserAsync } from '../../store/user'
 
 export const LoginComponent = ({ dispatch }) => {
   const [loading, setLoadState] = useState(false);
@@ -16,7 +15,7 @@ export const LoginComponent = ({ dispatch }) => {
 
     setLoadState(true);
 
-    loginUserService(data)
+    /*loginUserService(data)
       .then(user => {
         setLoadState(false);
         dispatch(setUser(user));
@@ -25,7 +24,9 @@ export const LoginComponent = ({ dispatch }) => {
       .catch(err => {
         setLoadState(false);
         setError(err);
-      })
+      })*/
+
+    dispatch(loginUserAsync(data));
   };
 
   return (

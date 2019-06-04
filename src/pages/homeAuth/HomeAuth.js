@@ -3,7 +3,7 @@ import './main.scss';
 
 export class HomeAuthComponent extends Component {
   goToCategories = () => {
-    console.log('Go to categories');
+    this.props.history.push('/categories');
   }
 
   render() {
@@ -28,4 +28,4 @@ export class HomeAuthComponent extends Component {
   }
 }
 
-export const HomeAuth = connect(state => ({ user: state.user, info: state.info }))(HomeAuthComponent);
+export const HomeAuth = connect(state => ({ user: state.user.data, info: state.info }))(HomeAuthComponent);

@@ -4,8 +4,6 @@ export class InputText extends Component {
   static defaultProps = {
     deactivate: _ => _,
     text: '',
-    active: false,
-    activate: _ => _
   }
 
   inputEl = React.createRef();
@@ -16,12 +14,24 @@ export class InputText extends Component {
     inputActive: this.props.active
   };
 
+  componentDidUpdate(prevProps) {
+    const { text, active } = this.props;
+
+    if (prevProps.text !== text) {
+      this.setState({ inputText: this.props.text });
+    }
+
+    if (prevProps.active !== active) {
+      this.setState({ inputActive: active });
+    }
+  }
+
   change = ({ target }) => {
     this.setState({ inputText: target.value });
   }
 
   switchField = () => {
-    this.setState( { inputText: this.props.text });
+    this.setState( { inputActive: !this.state.inputActive });
   }
 
   blur = () => {
@@ -30,9 +40,11 @@ export class InputText extends Component {
   }
 
   click = () => {
-    if (!this.props.activate(this.props.id)) {
-      this.switchField();
-    }
+    const { click } = this.props;
+
+    if (click) return click(this.state.inputText);
+
+    this.switchField();
   }
 
   keyUp = ({ keyCode }) => {
@@ -45,37 +57,38 @@ export class InputText extends Component {
   getSpanWidth() {
     const active = this.state.inputActive || this.props.active;
     if (active && this.textEl.current) {
-      return this.textEl.current.getBoundingClientRect().width * 1.2;
+      return this.textEl.current.getBoundingClientRect().width;
     }
 
     return 'auto';
   }
 
   render() {
-    const { inputText } = this.state;
+    const { inputText, inputActive } = this.state;
     const width = `${this.getSpanWidth()}px`;
-    const { textClassName, active } = this.props;
+    const { textClassName, textarea, placeholder } = this.props;
+    const inputProps = {
+      value: inputText,
+      onChange: this.change,
+      onBlur: this.blur,
+      onKeyUp: this.keyUp,
+      ref: this.inputEl,
+      autoFocus: true,
+      style: { width },
+      placeholder,
+    };
 
     return (
       <span className="input-text">
-        {!active ?
+        {!inputActive ?
           <span
             onClick={this.click}
             ref={this.textEl}
             className={textClassName}
           >
-            {this.props.text}
+            {inputText || placeholder}
           </span> :
-          <input
-            type="text"
-            value={inputText}
-            onChange={this.change}
-            onBlur={this.blur}
-            onKeyUp={this.keyUp}
-            ref={this.inputEl}
-            autoFocus
-            style={{ width }}
-          />
+          textarea ? <textarea {...inputProps} /> : <input {...inputProps} type="text" />
         }
       </span>
     );
