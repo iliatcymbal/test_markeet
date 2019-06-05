@@ -22,7 +22,7 @@ const mapToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeUser() { dispatch(removeUser()) },
+  removeUser() { dispatch(removeUser()); },
 });
 
 export const Header = connect(mapToProps, mapDispatchToProps)(HeaderComponent);

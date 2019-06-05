@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, withRouter } from 'react-router-dom';
 
 import { store } from './store';
-import { App } from './appComponent'
+import { App } from './appComponent';
 
 const RouteApp = withRouter(App);
 

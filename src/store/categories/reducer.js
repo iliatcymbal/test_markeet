@@ -5,7 +5,7 @@ export const categories = (state = store.products, action) => {
   switch (action.type) {
     case SET_CATEGORIES: return action.data;
     case REMOVE_CATEGORIES: return [];
-  }
+  };
 
   return state;
 };

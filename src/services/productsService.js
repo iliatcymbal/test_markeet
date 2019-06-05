@@ -1,4 +1,4 @@
-import { server } from './';
+import { server } from '.';
 
 export const getProducts = () => server.get('public/products');
 

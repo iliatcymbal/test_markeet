@@ -1,4 +1,4 @@
-import { ButtonLink } from '../../components/button'
+import { Link } from 'react-router-dom';
 import './home.scss';
 
 export const Home = ({ history }) => (
@@ -8,6 +8,6 @@ export const Home = ({ history }) => (
     <p>From the 1st December our company starts to deliver online order.</p>
     <p>First hundred customers gets a 10% discount!</p>
 
-    <ButtonLink to="/categories" />
+    <Link to="/categories" />
   </article>
 );

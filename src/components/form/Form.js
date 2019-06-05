@@ -9,20 +9,22 @@ export class Form extends Component {
   ];
 
   state = this.fields.reduce((acc, item) => ({
-    ...acc,
-    [item.label]: { value: '', error: '' } }),
+      ...acc,
+      [item.label]: { value: '', error: '' }
+    }),
     {})
 
   // state = { email: { value: '', error: '' } } }
 
   changeField = ({ target }) => {
+    // eslint-disable-next-line
     const value = target.hasOwnProperty('checked') ? target.checked : target.value;
 
     this.setState({ [target.name]: { value, error: '' } });
   }
 
-  validateField = ({ target }, index) => {
-    const field = this.fields[index]
+  validateField = (e, index) => {
+    const field = this.fields[index];
     const stateField = this.state[field.label];
 
     if (stateField.value.length === 0) {
@@ -51,7 +53,7 @@ export class Form extends Component {
   }
 
   render() {
-    const {  disabledFields = [] } = this.props;
+    const { disabledFields = [] } = this.props;
 
     return (
       <form className="form" onSubmit={this.onSubmit}>
@@ -74,7 +76,7 @@ export class Form extends Component {
                 />
                 {state.error && <mark>{state.error}</mark>}
               </p>
-            )
+            );
           })
         }
 

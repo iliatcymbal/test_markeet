@@ -1,10 +1,10 @@
-import { store } from '../store';
+import { dispatch } from '../store';
 import { setError } from '../store/status';
 
 const BASE_URL = 'http://localhost:8086';
 
-const additioinalHeaders = {
-  headers:{
+const additionalHeaders = {
+  headers: {
     'Content-type': 'application/json; charset=utf-8'
   }
 };
@@ -20,16 +20,16 @@ export const request = (url, method = 'get', data, settings = {}) => {
   if (data) options.body = JSON.stringify(data);
 
   const promise = fetch(`${BASE_URL}/${url}`, options)
-    .then(response =>  response.json())
-    .then(data => {
+    .then(response => response.json())
+    .then((data) => {
       if (!data.error) return data;
 
       throw data.error;
     })
-    .catch(err =>  {
+    .catch((err) => {
       const error = String(err);
 
-      if (!isCheckingUser) store.dispatch(setError(error));
+      if (!isCheckingUser) dispatch(setError(error));
       throw error;
     });
 
@@ -46,10 +46,10 @@ export const server = {
   },
 
   post(url, data) {
-    return request(url, 'post', data, additioinalHeaders);
+    return request(url, 'post', data, additionalHeaders);
   },
 
   put(url, data) {
-    return request(url, 'put', data, additioinalHeaders);
+    return request(url, 'put', data, additionalHeaders);
   }
 };

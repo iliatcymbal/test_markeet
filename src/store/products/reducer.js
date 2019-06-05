@@ -1,5 +1,5 @@
 import store from '../state';
-import { SET_PRODUCTS, REMOVE_PRODUCTS } from './actions'
+import { SET_PRODUCTS, REMOVE_PRODUCTS } from './actions';
 
 export const products = (state = store.products, action) => {
   switch (action.type) {

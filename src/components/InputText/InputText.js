@@ -7,6 +7,7 @@ export class InputText extends Component {
   }
 
   inputEl = React.createRef();
+
   textEl = React.createRef();
 
   state = {
@@ -14,14 +15,14 @@ export class InputText extends Component {
     inputActive: this.props.active
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate({ text: prevText, active: prevActive }) {
     const { text, active } = this.props;
 
-    if (prevProps.text !== text) {
+    if (prevText !== text) {
       this.setState({ inputText: this.props.text });
     }
 
-    if (prevProps.active !== active) {
+    if (prevActive !== active) {
       this.setState({ inputActive: active });
     }
   }
@@ -31,32 +32,42 @@ export class InputText extends Component {
   }
 
   switchField = () => {
-    this.setState( { inputActive: !this.state.inputActive });
+    this.setState({ inputActive: !this.state.inputActive });
   }
 
   blur = () => {
+    const { deactivate } = this.props;
+    const { inputText } = this.state;
+
     this.switchField();
-    this.props.deactivate(this.state.inputText);
+    deactivate(inputText);
   }
 
   click = () => {
     const { click } = this.props;
+    const { inputText } = this.state;
 
-    if (click) return click(this.state.inputText);
+    if (click) return click(inputText);
 
     this.switchField();
   }
 
   keyUp = ({ keyCode }) => {
+    const { deactivate } = this.props;
+    const { inputText } = this.state;
+
     if (keyCode === 13) {
       this.switchField();
-      this.props.deactivate(this.state.inputText);
+      deactivate(inputText);
     }
   }
 
   getSpanWidth() {
-    const active = this.state.inputActive || this.props.active;
-    if (active && this.textEl.current) {
+    const { inputActive } = this.state;
+    const { active } = this.props;
+
+    const activeInput = inputActive || active;
+    if (activeInput && this.textEl.current) {
       return this.textEl.current.getBoundingClientRect().width;
     }
 

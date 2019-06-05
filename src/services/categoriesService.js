@@ -1,4 +1,4 @@
-import { server } from './';
+import { server } from '.';
 
 export const getInfo = () => server.get('shop_info');
 
