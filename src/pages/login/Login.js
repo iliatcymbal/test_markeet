@@ -1,30 +1,13 @@
-import { useState } from 'react'
-import { Loader } from '../../components/loader'
-import { loginUserAsync } from '../../store/user'
+import { Loader } from '../../components/loader';
+import { loginUserAsync } from '../../store/user';
 
-export const LoginComponent = ({ dispatch }) => {
-  const [loading, setLoadState] = useState(false);
-  const [error, setError] = useState('');
-
+export const LoginComponent = ({ dispatch, status }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const data = {
       email: e.target.email.value,
       password: e.target.password.value,
     };
-
-    setLoadState(true);
-
-    /*loginUserService(data)
-      .then(user => {
-        setLoadState(false);
-        dispatch(setUser(user));
-        // Store.dispatch({ type: 'Set user', data: user })
-      })
-      .catch(err => {
-        setLoadState(false);
-        setError(err);
-      })*/
 
     dispatch(loginUserAsync(data));
   };
@@ -44,17 +27,13 @@ export const LoginComponent = ({ dispatch }) => {
         name="password"
         defaultValue="admin"
       />
-        <br /><br />
-
-        <p>
-          {error}
-        </p>
+      <br /><br />
 
       <input type="submit" value="Login" />
 
-      <Loader shown={loading} />
+      <Loader shown={status.loading} />
     </form>
   );
 };
 
-export const Login = connect()(LoginComponent);
+export const Login = connect(state => ({ status: state.user.status }))(LoginComponent);

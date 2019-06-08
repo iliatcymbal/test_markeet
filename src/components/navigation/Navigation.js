@@ -74,11 +74,11 @@ export const Navigation = ({ user, info, onLogout }) => {
                 Sign in
               </Link>
               /&nbsp;
-              <a
-                href="/newuser"
+              <Link
+                to="/newuser"
               >
                 Sign up
-              </a>
+              </Link>
             </>
         }
       </div>

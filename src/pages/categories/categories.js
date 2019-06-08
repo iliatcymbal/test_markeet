@@ -25,7 +25,10 @@ export const CategoriesComponent = ({ categories, dispatch }) => {
 
         <div>
           <h2>Published categories</h2>
-          <EditableItems items={categories.filter(item => item.published)} onSelect={console.log}/>
+          <EditableItems
+            items={categories.filter(item => item.published)}
+            onSelect={console.log}
+          />
         </div>
 
         <div>
