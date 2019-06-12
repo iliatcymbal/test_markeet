@@ -42,6 +42,13 @@ module.exports = {
   },
   mode: isProduction ? 'production' : 'development',
 
+  resolve: {
+    alias: {
+      components: path.resolve(__dirname, '../src/components')
+      store: path.resolve(__dirname, '../src/store')
+    }
+  },
+
   module: {
     rules: [
      /* {
@@ -61,9 +68,9 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
             plugins: [
-              'syntax-dynamic-import',
+              '@babel/plugin-transform-modules-commonjs',
               '@babel/plugin-proposal-class-properties',
-              '@babel/plugin-transform-regenerator'
+              '@babel/plugin-transform-regenerator',
             ],
           }
         }

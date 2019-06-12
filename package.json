@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ./config/jest.config.js --watchAll --coverage=false",
     "start": "npx webpack --config=./config/webpack.config.js",
     "server": "npx webpack-dev-server --config ./config/webpack.config.js --open",
     "server:prod": "NODE_ENV=production npx webpack-dev-server --config ./config/webpack.config.js --open"
@@ -32,16 +32,22 @@
     "redux-saga": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/plugin-transform-react-jsx": "^7.3.0",
     "@babel/plugin-transform-regenerator": "^7.4.5",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^8.0.5",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^2.1.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "^2.1.2",
@@ -58,5 +64,17 @@
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.3.1",
     "yargs": "^13.2.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-react-jsx",
+      "@babel/plugin-transform-modules-commonjs",
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-transform-regenerator"
+    ]
   }
 }
