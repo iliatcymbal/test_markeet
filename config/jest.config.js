@@ -2,7 +2,8 @@ module.exports = {
   verbose: true,
   setupFiles: ['../config/jest.setup.js'],
   moduleNameMapper: {
-    '\\.(css|scss)$': 'babel-jest'
+    '\\.(css|scss)$': 'babel-jest',
+    '^components/(.*)$': '<rootDir>/components/$1',
   },
   //roots: ['../src'],
   rootDir: '../src',
